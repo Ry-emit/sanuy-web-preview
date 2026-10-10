@@ -1,0 +1,4 @@
+Contact: https://ry-emit.github.io/sanuy-web-preview/#diagnostico
+Expires: 2027-10-10T11:54:13Z
+Preferred-Languages: es, ca, en
+Canonical: https://ry-emit.github.io/sanuy-web-preview/.well-known/security.txt
