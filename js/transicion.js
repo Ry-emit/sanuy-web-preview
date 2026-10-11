@@ -29,7 +29,13 @@
     '/en/how-we-work/':  TURQUESA,
     '/en/who-its-for/':  AMARILLO,
     '/en/who-answers/':  NARANJA,
-    '/en/contact/':      TURQUESA
+    '/en/contact/':      TURQUESA,
+    '/ca/':              NARANJA,
+    '/ca/que-fem/':      VIOLETA,
+    '/ca/com-treballem/': TURQUESA,
+    '/ca/per-a-qui/':    AMARILLO,
+    '/ca/qui-respon/':   NARANJA,
+    '/ca/contacte/':     TURQUESA
   };
   function slugOf(url) { return url.pathname.replace(/^\/sanuy-web-preview(?=\/|$)/, '') || '/'; }
 

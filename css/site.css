@@ -353,8 +353,8 @@ a.takeover__title:hover { color: var(--paper); }
 .menu__panel { position: absolute; left: 0; right: 0; top: 100%; display: grid; justify-items: start; gap: 20px; padding: var(--s3) var(--gutter); background: var(--paper); border-top: var(--line); border-bottom: var(--line); font-size: 1.25rem; line-height: 1.2; }
 .menu:not([open]) .menu__panel { display: none; }
 .head { position: sticky; }
-/* 1120 px and not 1024: with the language link, the four links and the button do not fit below that */
-@media (max-width: 1119px) {
+/* 1200 px and not 1024: with the three language codes, the four links and the button do not fit below that */
+@media (max-width: 1199px) {
   .nav { display: none; }
   .menu { display: block; }
   .head__inner { gap: var(--s2); }
@@ -605,23 +605,27 @@ a.takeover__title:hover { color: var(--paper); }
 .is-playing .x-turn { animation-name: x-turn; animation-duration: 2.6s; animation-fill-mode: both; animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
 @keyframes x-turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* ---------- Language link (header) ---------- */
+/* ---------- Language switch (header): ES · CA · EN, the current one underlined in the accent ---------- */
+.langs { display: flex; flex: none; align-items: center; gap: 0.625rem; }
 .lang { flex: none; padding: 8px 2px; border-bottom: 2px solid transparent; font-size: 0.8125rem; line-height: 1.2; letter-spacing: 0.04em; text-transform: uppercase; }
-.lang:hover, .lang:focus-visible { border-bottom-color: var(--ink); }
+a.lang:hover, a.lang:focus-visible { border-bottom-color: var(--ink); }
+.lang[aria-current] { border-bottom-color: var(--accent); }
 
-/* On a phone the button needs the room: the language link moves into the "Menú" panel. */
-.menu__panel a.menu__lang { margin-top: var(--s1); padding-top: var(--s2); width: 100%; border-top: var(--line); border-bottom: 0; font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase; }
+/* On a phone the button needs the room: the other languages move into the "Menú" panel. */
+.menu__langs { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); width: 100%; margin-top: var(--s1); padding-top: var(--s2); border-top: var(--line); }
+.menu__panel a.menu__lang { padding-block: 6px; border-bottom: 0; font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase; }
 .menu__panel a.menu__lang:hover { color: var(--accent); }
-@media (max-width: 519px) { .head .lang { display: none; } }
+@media (max-width: 639px) { .head .langs { display: none; } }
 @media (max-width: 400px) { .head .btn--sm { padding-inline: 0.6rem; font-size: 0.6875rem; letter-spacing: 0; } }
 @media (max-width: 340px) {
-  .head__inner, .head__end { gap: 0.5rem; }
-  .head .logo--head { width: 68px; }
+  .head__inner, .head__end { gap: 0.375rem; }
+  .head .logo--head { width: 64px; }
   .head .btn--sm { padding-inline: 0.5rem; font-size: 0.625rem; }
 }
 
 /* English breaks words less readily than Spanish: no two-letter pieces */
-:lang(en) .copy > p:not(.tlink):not(.byline):not(.updated), :lang(en) .copy li > span, :lang(en) .founder__text p + p { hyphenate-limit-chars: 7 3 3; -webkit-hyphenate-limit-before: 3; -webkit-hyphenate-limit-after: 3; }
+:lang(en) .copy > p:not(.tlink):not(.byline):not(.updated), :lang(en) .copy li > span, :lang(en) .founder__text p + p,
+:lang(ca) .copy > p:not(.tlink):not(.byline):not(.updated), :lang(ca) .copy li > span, :lang(ca) .founder__text p + p { hyphenate-limit-chars: 7 3 3; -webkit-hyphenate-limit-before: 3; -webkit-hyphenate-limit-after: 3; }
 
 /* ---------- Contact page ---------- */
 /* the question on the accent block, as the H1 of the page */

@@ -16,13 +16,18 @@
 // The canvas is decorative (aria-hidden): the section's text is real HTML next to it.
 (function () {
   var TAU = 6.28318, PI = 3.14159, VW = 100, VH = 72, HEAD = 72;
-  // The words drawn on the canvas are written in Spanish below; on an English page they are swapped here.
-  var EN = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'en';
-  var WORDS = { 'PROGRAMAS TÉCNICOS': 'TECHNICAL SOFTWARE', 'TÉCNICOS': 'TECHNICAL', 'HOJAS DE CÁLCULO': 'SPREADSHEETS', 'HOJAS': 'SHEETS', 'CORREO': 'EMAIL',
+  // The words drawn on the canvas are written in Spanish below; on a Catalan or an English page they are swapped here.
+  var LANG = (document.documentElement.getAttribute('lang') || '').slice(0, 2);
+  var WORDS_CA = { 'PROGRAMAS TÉCNICOS': 'PROGRAMES TÈCNICS', 'TÉCNICOS': 'TÈCNICS', 'HOJAS DE CÁLCULO': 'FULLS DE CÀLCUL', 'HOJAS': 'FULLS', 'CORREO': 'CORREU',
+    'QUIÉN REVISA': 'QUI REVISA', 'LOS PROGRAMAS ANTIGUOS': 'ELS PROGRAMES ANTICS', 'PANTALLAS NUEVAS': 'PANTALLES NOVES', 'PEDIDOS': 'COMANDES', 'FACTURAS': 'FACTURES', 'TARIFAS': 'TARIFES',
+    'LOS DATOS DE LA EMPRESA': 'LES DADES DE L’EMPRESA', 'CADA PERSONA DEL EQUIPO': 'CADA PERSONA DE L’EQUIP', 'POSICIONAMIENTO': 'POSICIONAMENT', 'CONTENIDO': 'CONTINGUT',
+    'UNA CONEXIÓN': 'UNA CONNEXIÓ', 'MANTENIMIENTO MENSUAL': 'MANTENIMENT MENSUAL', 'LOS DATOS DE TU EMPRESA': 'LES DADES DE LA TEVA EMPRESA' };
+  var WORDS_EN = { 'PROGRAMAS TÉCNICOS': 'TECHNICAL SOFTWARE', 'TÉCNICOS': 'TECHNICAL', 'HOJAS DE CÁLCULO': 'SPREADSHEETS', 'HOJAS': 'SHEETS', 'CORREO': 'EMAIL',
     'QUIÉN REVISA': 'WHO REVIEWS', 'LOS PROGRAMAS ANTIGUOS': 'THE OLD SOFTWARE', 'PANTALLAS NUEVAS': 'NEW SCREENS', 'PEDIDOS': 'ORDERS', 'FACTURAS': 'INVOICES', 'TARIFAS': 'PRICE LISTS',
     'LOS DATOS DE LA EMPRESA': 'THE COMPANY’S DATA', 'CADA PERSONA DEL EQUIPO': 'EACH PERSON ON THE TEAM', 'POSICIONAMIENTO': 'SEARCH RANKING', 'CONTENIDO': 'CONTENT',
     'UNA CONEXIÓN': 'ONE CONNECTION', 'MANTENIMIENTO MENSUAL': 'MONTHLY MAINTENANCE', 'CADA MES': 'EVERY MONTH', 'LOS DATOS DE TU EMPRESA': 'YOUR COMPANY’S DATA', 'UNA PERSONA REVISA': 'A PERSON REVIEWS' };
-  function word(s) { return EN && WORDS[s] ? WORDS[s] : s; }
+  var WORDS = LANG === 'en' ? WORDS_EN : LANG === 'ca' ? WORDS_CA : {};
+  function word(s) { return WORDS[s] || s; }
   var INK = '#111111', ACCENT = '#ee4b1c', PAPER = '#fafafa';
 
   // ---------- Shapes (x right · y down · z towards the viewer). Each returns points at even distances ----------
