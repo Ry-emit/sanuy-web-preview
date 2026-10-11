@@ -16,6 +16,13 @@
 // The canvas is decorative (aria-hidden): the section's text is real HTML next to it.
 (function () {
   var TAU = 6.28318, PI = 3.14159, VW = 100, VH = 72, HEAD = 72;
+  // The words drawn on the canvas are written in Spanish below; on an English page they are swapped here.
+  var EN = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'en';
+  var WORDS = { 'PROGRAMAS TÉCNICOS': 'TECHNICAL SOFTWARE', 'TÉCNICOS': 'TECHNICAL', 'HOJAS DE CÁLCULO': 'SPREADSHEETS', 'HOJAS': 'SHEETS', 'CORREO': 'EMAIL',
+    'QUIÉN REVISA': 'WHO REVIEWS', 'LOS PROGRAMAS ANTIGUOS': 'THE OLD SOFTWARE', 'PANTALLAS NUEVAS': 'NEW SCREENS', 'PEDIDOS': 'ORDERS', 'FACTURAS': 'INVOICES', 'TARIFAS': 'PRICE LISTS',
+    'LOS DATOS DE LA EMPRESA': 'THE COMPANY’S DATA', 'CADA PERSONA DEL EQUIPO': 'EACH PERSON ON THE TEAM', 'POSICIONAMIENTO': 'SEARCH RANKING', 'CONTENIDO': 'CONTENT',
+    'UNA CONEXIÓN': 'ONE CONNECTION', 'MANTENIMIENTO MENSUAL': 'MONTHLY MAINTENANCE', 'CADA MES': 'EVERY MONTH', 'LOS DATOS DE TU EMPRESA': 'YOUR COMPANY’S DATA', 'UNA PERSONA REVISA': 'A PERSON REVIEWS' };
+  function word(s) { return EN && WORDS[s] ? WORDS[s] : s; }
   var INK = '#111111', ACCENT = '#ee4b1c', PAPER = '#fafafa';
 
   // ---------- Shapes (x right · y down · z towards the viewer). Each returns points at even distances ----------
@@ -506,7 +513,8 @@
     var V = VARIANTS[opts.variant] || VARIANTS.A;
     var N = opts.count || Math.round((small ? 2000 : 3800) * (V.dots || 1));
     var NAMES = ['ERP', small ? 'TÉCNICOS' : 'PROGRAMAS TÉCNICOS', small ? 'HOJAS' : 'HOJAS DE CÁLCULO', 'CORREO', 'WHATSAPP'];
-    var SCENES = V.build(NAMES);
+    var SCENES = V.build(NAMES.map(word));
+    SCENES.forEach(function (sc) { (sc.labels || []).forEach(function (l) { l.t = word(l.t); }); });
     // `only`: build just these scenes (by key), in this order. The home story asks for the scenes of its captions.
     if (opts.only && SCENES.some(function (sc) { return sc.key; })) {
       var pick = opts.only.map(function (k) { return SCENES.filter(function (sc) { return sc.key === k; })[0]; }).filter(Boolean);

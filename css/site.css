@@ -197,7 +197,6 @@ a.takeover__title:hover { color: var(--paper); }
 .takeover__foot { display: grid; justify-items: center; }
 
 /* ---------- Formulario ---------- */
-.contact { display: grid; gap: var(--s5); }
 .form { display: grid; gap: var(--s4); width: 100%; }
 .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s4) var(--s3); }
 .field { display: grid; gap: var(--s1); }
@@ -211,7 +210,6 @@ a.takeover__title:hover { color: var(--paper); }
 .choice input:checked + span { background: var(--ink); color: var(--paper); }
 .choice input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 4px; }
 .note { display: grid; justify-items: start; gap: var(--s1); padding: var(--s3); border: var(--line); }
-@media (min-width: 1024px) { .contact { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: var(--s6); } }
 
 /* ---------- Pie ---------- */
 .foot { padding-block: var(--section) var(--s5); background: var(--ink); color: var(--paper); }
@@ -355,7 +353,8 @@ a.takeover__title:hover { color: var(--paper); }
 .menu__panel { position: absolute; left: 0; right: 0; top: 100%; display: grid; justify-items: start; gap: 20px; padding: var(--s3) var(--gutter); background: var(--paper); border-top: var(--line); border-bottom: var(--line); font-size: 1.25rem; line-height: 1.2; }
 .menu:not([open]) .menu__panel { display: none; }
 .head { position: sticky; }
-@media (max-width: 1023px) {
+/* 1120 px and not 1024: with the language link, the four links and the button do not fit below that */
+@media (max-width: 1119px) {
   .nav { display: none; }
   .menu { display: block; }
   .head__inner { gap: var(--s2); }
@@ -605,3 +604,47 @@ a.takeover__title:hover { color: var(--paper); }
 .x-turn { transform-box: view-box; transform-origin: 260px 120px; }
 .is-playing .x-turn { animation-name: x-turn; animation-duration: 2.6s; animation-fill-mode: both; animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
 @keyframes x-turn { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ---------- Language link (header) ---------- */
+.lang { flex: none; padding: 8px 2px; border-bottom: 2px solid transparent; font-size: 0.8125rem; line-height: 1.2; letter-spacing: 0.04em; text-transform: uppercase; }
+.lang:hover, .lang:focus-visible { border-bottom-color: var(--ink); }
+
+/* On a phone the button needs the room: the language link moves into the "Menú" panel. */
+.menu__panel a.menu__lang { margin-top: var(--s1); padding-top: var(--s2); width: 100%; border-top: var(--line); border-bottom: 0; font-size: 0.8125rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.menu__panel a.menu__lang:hover { color: var(--accent); }
+@media (max-width: 519px) { .head .lang { display: none; } }
+@media (max-width: 400px) { .head .btn--sm { padding-inline: 0.6rem; font-size: 0.6875rem; letter-spacing: 0; } }
+@media (max-width: 340px) {
+  .head__inner, .head__end { gap: 0.5rem; }
+  .head .logo--head { width: 68px; }
+  .head .btn--sm { padding-inline: 0.5rem; font-size: 0.625rem; }
+}
+
+/* English breaks words less readily than Spanish: no two-letter pieces */
+:lang(en) .copy > p:not(.tlink):not(.byline):not(.updated), :lang(en) .copy li > span, :lang(en) .founder__text p + p { hyphenate-limit-chars: 7 3 3; -webkit-hyphenate-limit-before: 3; -webkit-hyphenate-limit-after: 3; }
+
+/* ---------- Contact page ---------- */
+/* the question on the accent block, as the H1 of the page */
+.takeover h1 { font-size: clamp(2.25rem, 1rem + 5.2vw, 6.5rem); line-height: 0.98; max-width: 16ch; text-transform: uppercase; }
+.takeover--top { padding-block: var(--s5); }
+.contact { border-top: 0; }
+.contact__grid { display: grid; gap: var(--s5); }
+.contact__grid > * { min-width: 0; }
+.contact__form { padding: clamp(1.5rem, 0.9rem + 2.6vw, 3.5rem); border: var(--line); gap: var(--s4); scroll-margin-top: 96px; }
+.contact__form .fields { gap: var(--s3); }
+.contact__form .form { gap: var(--s3); }
+.contact__side .rows__row { padding-block: var(--s3); }
+.contact__side .rows__row .figure { font-size: clamp(2.25rem, 1.7rem + 1.8vw, 3.5rem); }
+.contact__side .title--m { font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.875rem); }
+/* a narrow column: straight left edge, no stretched lines */
+.contact__side .copy > p:not(.tlink):not(.byline):not(.updated), .contact__side .copy li > span { text-align: left; hyphens: manual; -webkit-hyphens: manual; word-spacing: normal; }
+@media (min-width: 1024px) {
+  .contact__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--s6); align-items: start; }
+  .contact__form { grid-column: 2; grid-row: 1; }
+  .contact__side { grid-column: 1; grid-row: 1; position: sticky; top: calc(72px + var(--s3)); }
+}
+@media (max-width: 719px) {
+  .takeover h1 { font-size: 11vw; max-width: 100%; overflow-wrap: anywhere; }
+  .takeover--top { padding-block: var(--s4); }
+  .contact { padding-top: var(--s4); }
+}

@@ -22,7 +22,14 @@
     '/distribucion/':    AMARILLO,
     '/estudio/':         VIOLETA,
     '/privacidad/':      VIOLETA,
-    '/aviso-legal/':     TURQUESA
+    '/aviso-legal/':     TURQUESA,
+    '/contacto/':        TURQUESA,
+    '/en/':              NARANJA,
+    '/en/what-we-do/':   VIOLETA,
+    '/en/how-we-work/':  TURQUESA,
+    '/en/who-its-for/':  AMARILLO,
+    '/en/who-answers/':  NARANJA,
+    '/en/contact/':      TURQUESA
   };
   function slugOf(url) { return url.pathname.replace(/^\/sanuy-web-preview(?=\/|$)/, '') || '/'; }
 
